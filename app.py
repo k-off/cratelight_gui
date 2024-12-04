@@ -32,8 +32,10 @@ from tkinter import simpledialog
 from sys import platform
 if platform == "linux" or platform == "linux2" or platform == "win32":
     from tkinter import Button # TODO: test on these platforms
+    borderless_option = {}
 elif platform == "darwin":
     from tkmacosx import Button # allows to change color of buttons on macos
+    borderless_option = {"borderless": 1}
 
 
 def validate_positive_int(value: str, label: tk.Label) -> bool:
@@ -382,8 +384,7 @@ class App:
         self.lbl_wall_height_valid.grid(row=2, column=2, columnspan=1)
         frame_wall_info.grid(row=1, column=0, padx=5, pady=10)
 
-        # create button
-        button = Button(parent, text="Create New Wall", command=self.add_wall, bg="#00cc00", borderless=1)
+        button = Button(parent, text="Create New Wall", command=self.add_wall, bg="#00cc00", **borderless_option)
         button.grid(row=4, column=0, columnspan=3)
         
     def add_wall(self) -> None:
