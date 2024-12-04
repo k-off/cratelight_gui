@@ -32,8 +32,10 @@ from tkinter import simpledialog
 from sys import platform
 if platform == "linux" or platform == "linux2" or platform == "win32":
     from tkinter import Button # TODO: test on these platforms
+    borderless_option = {}
 elif platform == "darwin":
     from tkmacosx import Button # allows to change color of buttons on macos
+    borderless_option = {"borderless": 1}
 
 
 def validate_positive_int(value: str, label: tk.Label) -> bool:
@@ -88,10 +90,10 @@ class Wall:
         
         self.palette = tk.Frame(self.container, width=50, height=100, borderwidth=1, relief="solid")
         self.current_color = [((128, 0, 128), "#52b4d8")]
-        self.color_button = Button(self.palette, text="Select Color", command=self.select_color, bg=self.current_color[0][-1], borderless=1)
+        self.color_button = Button(self.palette, text="Select Color", command=self.select_color, bg=self.current_color[0][-1], **borderless_option)
         self.color_button.pack()
 
-        self.save_button = Button(self.palette, text="Save", command=self.save, bg="white", borderless=1)
+        self.save_button = Button(self.palette, text="Save", command=self.save, bg="white", **borderless_option)
         self.save_button.pack()
 
         self.crates = []
@@ -382,8 +384,7 @@ class App:
         self.lbl_wall_height_valid.grid(row=2, column=2, columnspan=1)
         frame_wall_info.grid(row=1, column=0, padx=5, pady=10)
 
-        # create button
-        button = Button(parent, text="Create New Wall", command=self.add_wall, bg="#00cc00", borderless=1)
+        button = Button(parent, text="Create New Wall", command=self.add_wall, bg="#00cc00", **borderless_option)
         button.grid(row=4, column=0, columnspan=3)
         
     def add_wall(self) -> None:
