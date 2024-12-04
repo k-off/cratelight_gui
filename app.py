@@ -90,10 +90,10 @@ class Wall:
         
         self.palette = tk.Frame(self.container, width=50, height=100, borderwidth=1, relief="solid")
         self.current_color = [((128, 0, 128), "#52b4d8")]
-        self.color_button = Button(self.palette, text="Select Color", command=self.select_color, bg=self.current_color[0][-1], borderless=1)
+        self.color_button = Button(self.palette, text="Select Color", command=self.select_color, bg=self.current_color[0][-1], **borderless_option)
         self.color_button.pack()
 
-        self.save_button = Button(self.palette, text="Save", command=self.save, bg="white", borderless=1)
+        self.save_button = Button(self.palette, text="Save", command=self.save, bg="white", **borderless_option)
         self.save_button.pack()
 
         self.crates = []
